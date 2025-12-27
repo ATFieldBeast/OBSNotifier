@@ -53,22 +53,3 @@ jobs:
         with:
           name: ${{env.Project_Name}}_${{matrix.configuration}}
           path: ${{env.Project_Name}}/bin/${{matrix.configuration}}/
-
-  push_translation:
-    name: Update localization sources
-    runs-on: ubuntu-24.04
-    if: github.ref == 'refs/heads/master'
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      
-      - name: Crowdin Action
-        uses: crowdin/github-action@v2
-        with:
-          upload_sources: true
-        env:
-          CROWDIN_PROJECT_ID: ${{secrets.CROWDIN_PROJECT_ID}}
-          CROWDIN_PERSONAL_TOKEN: ${{secrets.CROWDIN_PERSONAL_TOKEN}}
